@@ -11,12 +11,16 @@ function  setQuery(evt) {
     }
 }
 
-function getResults(query) {
-    fetch(`${api.baseurl}weather?q=${query}&units=metric&APPID=${api.key}`)
-    .then(weather =>{
-        return weather.json();
-    }).then(displayResult);
-}
+    function getResults(query) {
+     try {
+       fetch(`${api.baseurl}weather?q=${query}&units=metric&APPID=${api.key}`)
+        .then(weather =>{
+            return weather.json();
+        }).then(displayResult);}
+        catch(err) {
+           document.querySelector(".weather").innerHTML = err.message;
+        }
+    }
 
 function displayResult(weather) {
     let city = document.querySelector(".city");
